@@ -1,0 +1,4 @@
+M:\Master-UPC\Gl\Debug\EngineMaster.exe
+M:\Master-UPC\Gl\Debug\EngineMaster.pdb
+M:\Master-UPC\GLTriangle\Debug\EngineMaster.exe
+M:\Master-UPC\GLTriangle\Debug\EngineMaster.pdb
