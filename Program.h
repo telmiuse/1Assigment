@@ -10,7 +10,7 @@ class Application;
 class Program : public Module
 {
 
-public: 
+public:
 
 	Program();
 	~Program();

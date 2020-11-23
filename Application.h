@@ -8,8 +8,12 @@ class ModuleRender;
 class ModuleWindow;
 class ModuleTextures;
 class ModuleInput;
-class Program;
+class ModuleRenderExercise;
 class ModuleCamera;
+class ModuleExTriangle;
+class Program;
+class ModuleTexture;
+class ModuleEditor;
 
 class Application
 {
@@ -27,7 +31,11 @@ public:
 	ModuleRender* renderer = nullptr;
 	ModuleWindow* window = nullptr;
 	ModuleInput* input = nullptr;
+	ModuleExTriangle* Triangle = nullptr;
 	Program* program = nullptr;
+	ModuleTexture* texture = nullptr;
+	ModuleEditor* editor = nullptr;
+	void RequestBrowser(const char* route);
 
 private:
 

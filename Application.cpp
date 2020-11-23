@@ -4,19 +4,28 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleCamera.h"
+#include "ModuleExTriangle.h"
+#include "ModuleTexture.h"
 #include "Program.h"
-
-
+#include "ModuleEditor.h"
 using namespace std;
 
 Application::Application()
 {
 	// Order matters: they will Init/start/update in this order
-	modules.push_back(Camera = new ModuleCamera());
+
 	modules.push_back(window = new ModuleWindow());
 	modules.push_back(renderer = new ModuleRender());
 	modules.push_back(input = new ModuleInput());
-	
+	modules.push_back(Camera = new ModuleCamera());
+	modules.push_back(program = new Program());
+	modules.push_back(editor = new ModuleEditor());
+	modules.push_back(texture = new ModuleTexture());
+	modules.push_back(Triangle = new ModuleExTriangle());
+
+
+
+
 }
 
 Application::~Application()
@@ -61,4 +70,8 @@ bool Application::CleanUp()
 		ret = (*it)->CleanUp();
 
 	return ret;
+}
+void Application::RequestBrowser(const char* route)
+{
+	ShellExecute(NULL, "open", route, nullptr, nullptr, SW_SHOWNORMAL);
 }

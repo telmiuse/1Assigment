@@ -27,12 +27,22 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	const float4x4 GetView() {
+		return frustum.ViewMatrix();
+	};
+
+
+	const float4x4 GetProjection() {
+		return frustum.ProjectionMatrix();
+	};
 	void WindowResized(unsigned width, unsigned height);
 	void ModuleCamera::Rotate(const float3x3 rotation_matrix);
 	void MoveForward();
 	void MoveRight();
-	void Rotate();
+	void RotateArrows();
 	void MouseRotate();
+	
 
 protected:
 	Frustum frustum;
@@ -40,5 +50,8 @@ protected:
 	float turn_speed;
 	float pitch_angle;
 	float3 camera_position;
+	double NOW;
+	double LAST;
+	double deltaTime;
 
 };

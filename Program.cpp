@@ -47,7 +47,7 @@ bool Program::CleanUp()
 
 
 
-char* Program:: LoadShaderSource(const char* shader_file_name)
+char* Program::LoadShaderSource(const char* shader_file_name)
 {
 	char* data = nullptr;
 	FILE* file = nullptr;
@@ -66,7 +66,7 @@ char* Program:: LoadShaderSource(const char* shader_file_name)
 }
 
 
-unsigned Program:: CompileShader(unsigned type, const char* source)
+unsigned Program::CompileShader(unsigned type, const char* source)
 {
 	GLuint shader_id = glCreateShader(type);
 	glShaderSource(shader_id, 1, &source, 0);
@@ -90,7 +90,7 @@ unsigned Program:: CompileShader(unsigned type, const char* source)
 }
 
 
-unsigned Program:: CreateProgram(unsigned vtx_shader, unsigned frg_shader)
+unsigned Program::CreateProgram(unsigned vtx_shader, unsigned frg_shader)
 {
 	unsigned program_id = glCreateProgram();
 	glAttachShader(program_id, vtx_shader);

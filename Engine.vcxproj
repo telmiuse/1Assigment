@@ -74,13 +74,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./SDL/include;./glut;Include Directories $(VC_IncludePath);$(WindowsSDK_IncludePath);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./SDL/include;./glut;./Devil;./assimp</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;DevIL.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -142,10 +142,97 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="assimp\aabb.h" />
+    <ClInclude Include="assimp\ai_assert.h" />
+    <ClInclude Include="assimp\anim.h" />
+    <ClInclude Include="assimp\BaseImporter.h" />
+    <ClInclude Include="assimp\Bitmap.h" />
+    <ClInclude Include="assimp\BlobIOSystem.h" />
+    <ClInclude Include="assimp\ByteSwapper.h" />
+    <ClInclude Include="assimp\camera.h" />
+    <ClInclude Include="assimp\cexport.h" />
+    <ClInclude Include="assimp\cfileio.h" />
+    <ClInclude Include="assimp\cimport.h" />
+    <ClInclude Include="assimp\color4.h" />
+    <ClInclude Include="assimp\Compiler\poppack1.h" />
+    <ClInclude Include="assimp\Compiler\pstdint.h" />
+    <ClInclude Include="assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="assimp\config.h" />
+    <ClInclude Include="assimp\CreateAnimMesh.h" />
+    <ClInclude Include="assimp\DefaultIOStream.h" />
+    <ClInclude Include="assimp\DefaultIOSystem.h" />
+    <ClInclude Include="assimp\DefaultLogger.hpp" />
+    <ClInclude Include="assimp\Defines.h" />
+    <ClInclude Include="assimp\defs.h" />
+    <ClInclude Include="assimp\Exceptional.h" />
+    <ClInclude Include="assimp\Exporter.hpp" />
+    <ClInclude Include="assimp\fast_atof.h" />
+    <ClInclude Include="assimp\GenericProperty.h" />
+    <ClInclude Include="assimp\Hash.h" />
+    <ClInclude Include="assimp\Importer.hpp" />
+    <ClInclude Include="assimp\importerdesc.h" />
+    <ClInclude Include="assimp\IOStream.hpp" />
+    <ClInclude Include="assimp\IOStreamBuffer.h" />
+    <ClInclude Include="assimp\IOSystem.hpp" />
+    <ClInclude Include="assimp\irrXMLWrapper.h" />
+    <ClInclude Include="assimp\light.h" />
+    <ClInclude Include="assimp\LineSplitter.h" />
+    <ClInclude Include="assimp\LogAux.h" />
+    <ClInclude Include="assimp\Logger.hpp" />
+    <ClInclude Include="assimp\LogStream.hpp" />
+    <ClInclude Include="assimp\Macros.h" />
+    <ClInclude Include="assimp\material.h" />
+    <ClInclude Include="assimp\MathFunctions.h" />
+    <ClInclude Include="assimp\matrix3x3.h" />
+    <ClInclude Include="assimp\matrix4x4.h" />
+    <ClInclude Include="assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="assimp\mesh.h" />
+    <ClInclude Include="assimp\metadata.h" />
+    <ClInclude Include="assimp\NullLogger.hpp" />
+    <ClInclude Include="assimp\ParsingUtils.h" />
+    <ClInclude Include="assimp\pbrmaterial.h" />
+    <ClInclude Include="assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="assimp\postprocess.h" />
+    <ClInclude Include="assimp\Profiler.h" />
+    <ClInclude Include="assimp\ProgressHandler.hpp" />
+    <ClInclude Include="assimp\qnan.h" />
+    <ClInclude Include="assimp\quaternion.h" />
+    <ClInclude Include="assimp\RemoveComments.h" />
+    <ClInclude Include="assimp\scene.h" />
+    <ClInclude Include="assimp\SceneCombiner.h" />
+    <ClInclude Include="assimp\SGSpatialSort.h" />
+    <ClInclude Include="assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="assimp\SmoothingGroups.h" />
+    <ClInclude Include="assimp\SpatialSort.h" />
+    <ClInclude Include="assimp\StandardShapes.h" />
+    <ClInclude Include="assimp\StreamReader.h" />
+    <ClInclude Include="assimp\StreamWriter.h" />
+    <ClInclude Include="assimp\StringComparison.h" />
+    <ClInclude Include="assimp\StringUtils.h" />
+    <ClInclude Include="assimp\Subdivision.h" />
+    <ClInclude Include="assimp\texture.h" />
+    <ClInclude Include="assimp\TinyFormatter.h" />
+    <ClInclude Include="assimp\types.h" />
+    <ClInclude Include="assimp\vector2.h" />
+    <ClInclude Include="assimp\vector3.h" />
+    <ClInclude Include="assimp\version.h" />
+    <ClInclude Include="assimp\Vertex.h" />
+    <ClInclude Include="assimp\XMLTools.h" />
+    <ClInclude Include="assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ConsoleWindow.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\DefaultImGuiWindow.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imconfig.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_impl_opengl3.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_impl_sdl.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_internal.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imstb_textedit.h" />
+    <ClInclude Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imstb_truetype.h" />
+    <ClInclude Include="ConfigurationWindow.h" />
+    <ClInclude Include="debug_draw.hpp" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="MathGeoLib\glut.h" />
-    <ClInclude Include="MathGeoLib\Math\glut.h" />
-    <ClInclude Include="Point.h" />
+    <ClInclude Include="ImGU\imconfig.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK2D.h" />
     <ClInclude Include="MathGeoLib\Algorithm\Random\LCG.h" />
@@ -177,6 +264,7 @@
     <ClInclude Include="MathGeoLib\Geometry\Triangle.h" />
     <ClInclude Include="MathGeoLib\Geometry\Triangle2D.h" />
     <ClInclude Include="MathGeoLib\Geometry\TriangleMesh.h" />
+    <ClInclude Include="MathGeoLib\glut.h" />
     <ClInclude Include="MathGeoLib\MathBuildConfig.h" />
     <ClInclude Include="MathGeoLib\MathGeoLib.h" />
     <ClInclude Include="MathGeoLib\MathGeoLibFwd.h" />
@@ -197,6 +285,7 @@
     <ClInclude Include="MathGeoLib\Math\float4_neon.h" />
     <ClInclude Include="MathGeoLib\Math\float4_sse.h" />
     <ClInclude Include="MathGeoLib\Math\FloatCmp.h" />
+    <ClInclude Include="MathGeoLib\Math\glut.h" />
     <ClInclude Include="MathGeoLib\Math\grisu3.h" />
     <ClInclude Include="MathGeoLib\Math\InclWindows.h" />
     <ClInclude Include="MathGeoLib\Math\Interpolate.h" />
@@ -222,6 +311,12 @@
     <ClInclude Include="MathGeoLib\Math\TransformOps.h" />
     <ClInclude Include="MathGeoLib\Math\vec2d.h" />
     <ClInclude Include="MathGeoLib\Time\Clock.h" />
+    <ClInclude Include="ModuleCarga.h" />
+    <ClInclude Include="ModuleDebugDraw.h" />
+    <ClInclude Include="ModuleEditor.h" />
+    <ClInclude Include="ModuleExTriangle.h" />
+    <ClInclude Include="ModuleTexture.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="ModuleInput.h" />
@@ -229,50 +324,18 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Program.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="src\Math\assume.h" />
-    <ClInclude Include="src\Math\BitFuncs.h" />
-    <ClInclude Include="src\Math\BitOps.h" />
-    <ClInclude Include="src\Math\Callstack.h" />
-    <ClInclude Include="src\Math\FixedPoint.h" />
-    <ClInclude Include="src\Math\float2.h" />
-    <ClInclude Include="src\Math\float3.h" />
-    <ClInclude Include="src\Math\float3x3.h" />
-    <ClInclude Include="src\Math\float3x4.h" />
-    <ClInclude Include="src\Math\float4.h" />
-    <ClInclude Include="src\Math\float4d.h" />
-    <ClInclude Include="src\Math\float4x4.h" />
-    <ClInclude Include="src\Math\float4x4_neon.h" />
-    <ClInclude Include="src\Math\float4x4_sse.h" />
-    <ClInclude Include="src\Math\float4_neon.h" />
-    <ClInclude Include="src\Math\float4_sse.h" />
-    <ClInclude Include="src\Math\FloatCmp.h" />
-    <ClInclude Include="src\Math\grisu3.h" />
-    <ClInclude Include="src\Math\InclWindows.h" />
-    <ClInclude Include="src\Math\Interpolate.h" />
-    <ClInclude Include="src\Math\MathAll.h" />
-    <ClInclude Include="src\Math\MathConstants.h" />
-    <ClInclude Include="src\Math\MathFunc.h" />
-    <ClInclude Include="src\Math\MathLog.h" />
-    <ClInclude Include="src\Math\MathNamespace.h" />
-    <ClInclude Include="src\Math\MathTypes.h" />
-    <ClInclude Include="src\Math\MatrixProxy.h" />
-    <ClInclude Include="src\Math\MiniFloat.h" />
-    <ClInclude Include="src\Math\MultiLineMacro.h" />
-    <ClInclude Include="src\Math\myassert.h" />
-    <ClInclude Include="src\Math\Polynomial.h" />
-    <ClInclude Include="src\Math\Quat.h" />
-    <ClInclude Include="src\Math\quat_simd.h" />
-    <ClInclude Include="src\Math\Rect.h" />
-    <ClInclude Include="src\Math\Reinterpret.h" />
-    <ClInclude Include="src\Math\simd.h" />
-    <ClInclude Include="src\Math\SSEMath.h" />
-    <ClInclude Include="src\Math\sse_mathfun.h" />
-    <ClInclude Include="src\Math\Swap.h" />
-    <ClInclude Include="src\Math\TransformOps.h" />
-    <ClInclude Include="src\Math\vec2d.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ConfigurationWindow.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ConsoleWindow.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\DefaultImGuiWindow.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\imgui_widgets.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MathGeoLib\Algorithm\GJK.cpp" />
@@ -318,31 +381,30 @@
     <ClCompile Include="MathGeoLib\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib\Time\Clock.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
+    <ClCompile Include="ModuleCarga.cpp" />
+    <ClCompile Include="ModuleDebugDraw.cpp" />
+    <ClCompile Include="ModuleEditor.cpp" />
+    <ClCompile Include="ModuleExTriangle.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
+    <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="src\Math\BitOps.cpp" />
-    <ClCompile Include="src\Math\Callstack.cpp" />
-    <ClCompile Include="src\Math\float2.cpp" />
-    <ClCompile Include="src\Math\float3.cpp" />
-    <ClCompile Include="src\Math\float3x3.cpp" />
-    <ClCompile Include="src\Math\float3x4.cpp" />
-    <ClCompile Include="src\Math\float4.cpp" />
-    <ClCompile Include="src\Math\float4d.cpp" />
-    <ClCompile Include="src\Math\float4x4.cpp" />
-    <ClCompile Include="src\Math\grisu3.c" />
-    <ClCompile Include="src\Math\grisu3_cpp.cpp" />
-    <ClCompile Include="src\Math\MathFunc.cpp" />
-    <ClCompile Include="src\Math\MathLog.cpp" />
-    <ClCompile Include="src\Math\MathOps.cpp" />
-    <ClCompile Include="src\Math\MiniFloat.cpp" />
-    <ClCompile Include="src\Math\Polynomial.cpp" />
-    <ClCompile Include="src\Math\Quat.cpp" />
-    <ClCompile Include="src\Math\SSEMath.cpp" />
-    <ClCompile Include="src\Math\TransformOps.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ResourceCompile Include="EngineMaster.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assimp\.editorconfig" />
+    <None Include="assimp\color4.inl" />
+    <None Include="assimp\config.h.in" />
+    <None Include="assimp\material.inl" />
+    <None Include="assimp\matrix3x3.inl" />
+    <None Include="assimp\matrix4x4.inl" />
+    <None Include="assimp\quaternion.inl" />
+    <None Include="assimp\SmoothingGroups.inl" />
+    <None Include="assimp\vector2.inl" />
+    <None Include="assimp\vector3.inl" />
     <None Include="MathGeoLib\Geometry\KDTree.inl" />
     <None Include="MathGeoLib\Geometry\QuadTree.inl" />
     <None Include="MathGeoLib\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
@@ -350,11 +412,12 @@
     <None Include="MathGeoLib\Geometry\TriangleMesh_IntersectRay_SSE.inl" />
     <None Include="MathGeoLib\Math\float2.inl" />
     <None Include="MathGeoLib\Math\Matrix.inl" />
-    <None Include="src\Math\float2.inl" />
-    <None Include="src\Math\Matrix.inl" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="EngineMaster.rc" />
+    <Text Include="C:\Users\telm\Desktop\BlackWindow-master\ImGui\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="assimp\assimp-vc142-mtd.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
