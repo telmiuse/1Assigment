@@ -4,11 +4,10 @@
 #include <GL/glew.h>
 #include "MathGeoLib/Math/float4x4.h"
 #include "MathGeoLib/Geometry/Frustum.h"
-#include <IL/il.h>
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_main.h>
-#include <IL/il.h>
+#include "IL/il.h"
 
 #include <GL/gl.h>
 class ModuleTexture : public Module
@@ -24,11 +23,14 @@ public:
 	bool CleanUp();
 	GLuint image;
 	ILuint texid;
+	unsigned int LoadTexture(const char* path);
+
 private:
 	SDL_Event event;
 	//ILuint texid;
+	unsigned int imageID;
 	ILboolean success;
-	//GLuint image;
+//	GLuint image;
 	int finished;
 	void* context;
 };

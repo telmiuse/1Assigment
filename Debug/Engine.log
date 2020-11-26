@@ -1,9 +1,2 @@
-﻿  ModuleCarga.cpp
-M:\Master-UPC\Gl\ModuleCarga.cpp(50,2): error C2065: 'materials': identificador no declarado
-M:\Master-UPC\Gl\ModuleCarga.cpp(55,4): error C2065: 'materials': identificador no declarado
-M:\Master-UPC\Gl\ModuleCarga.cpp(55,29): error C2039: "textures": no es un miembro de "Application"
-M:\Master-UPC\Gl\ModuleWindow.h(7): message : vea la declaración de 'Application'
-M:\Master-UPC\Gl\ModuleCarga.cpp(60,19): error C2653: 'Mesh': no es un nombre de clase o espacio de nombres
-M:\Master-UPC\Gl\ModuleCarga.cpp(62,19): error C2065: 'vbo': identificador no declarado
-M:\Master-UPC\Gl\ModuleCarga.cpp(63,32): error C2065: 'vbo': identificador no declarado
-M:\Master-UPC\Gl\ModuleCarga.cpp(77,2): error C2065: 'num_vertices': identificador no declarado
+﻿  ModuleMalla.cpp
+  Engine.vcxproj -> M:\Master-UPC\Gl\Debug\EngineMaster.exe

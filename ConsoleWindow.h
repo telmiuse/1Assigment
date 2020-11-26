@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DefaultImGuiWindow.h"
-#include "ImGu/imgui.h"
+#include "imgui.h"
 
 class ConsoleWindow :
     public DefaultImGuiWindow
@@ -17,7 +17,6 @@ public:
         // "CLASSIFY" is here to provide the test case where "C"+[tab] completes to "CL" and display multiple matches.
         AutoScroll = true;
         ScrollToBottom = false;
-        AddLog("Welcome to Dear ImGui!");
     };
     ~ConsoleWindow();
     void Update() override;

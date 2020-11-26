@@ -7,7 +7,7 @@
 #include "MathGeoLib/Math/float4x4.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
-
+#include "ModuleModelo.h"
 
 
 void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
@@ -102,14 +102,14 @@ update_status ModuleExTriangle::PreUpdate()
 
 update_status ModuleExTriangle::Update()
 {
-	//RenderTriangle();
+	App->modelo->Draw();
 	return UPDATE_CONTINUE;
 }
 
 // Called every draw update
 void ModuleExTriangle::RenderTriangle()
 {
-
+/*
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	// size = 3 float per vertex
@@ -121,7 +121,7 @@ void ModuleExTriangle::RenderTriangle()
 	glEnableVertexAttribArray(1);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0,(void*)(sizeof(float) * 3 * 3));// buffer offset
 
-	
+
 
 
 
@@ -142,7 +142,9 @@ void ModuleExTriangle::RenderTriangle()
 	glUniform1i(glGetUniformLocation(program, "mytexture"), 0);
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+		*/
 
+	App->modelo->Draw();
 }
 
 update_status ModuleExTriangle::PostUpdate()

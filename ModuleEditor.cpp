@@ -2,11 +2,12 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
-#include "ImGu/imgui_impl_sdl.h"
-#include "ImGu/imgui_impl_opengl3.h"
-#include "ImGu/imgui.h";
+#include "ImGU/imgui.h"
+#include "ImGU/imgui_impl_sdl.h"
+#include "ImGU/imgui_impl_opengl3.h"
 #include "ConsoleWindow.h"
 #include "ConfigurationWindow.h"
+
 ModuleEditor::ModuleEditor()
 {
 }

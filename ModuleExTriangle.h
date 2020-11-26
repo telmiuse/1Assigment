@@ -19,10 +19,12 @@ public:
 	bool CleanUp();
 	unsigned CreateTriangleVBO();
 	void RenderTriangle();
+	GLuint program;
+
 private:
 	float3 trianglePos;
 	Frustum frustum;
-	GLuint program;
+	//GLuint program;
 	unsigned vbo;
 	GLuint vtx_shader;
 	GLuint frg_shader;

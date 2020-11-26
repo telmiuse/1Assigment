@@ -21,14 +21,13 @@ ModuleTexture::~ModuleTexture()
 {
 }
 
-// Called before render is available
-bool ModuleTexture::Init()
-{
 
-	ilInit(); /* Initialization of DevIL */
+unsigned int ModuleTexture::LoadTexture(const char* path) {
+
+	///ilInit(); /* Initialization of DevIL */
 	ilGenImages(1, &texid); /* Generation of one image name */
 	ilBindImage(texid); /* Binding of image name */
-	success = ilLoadImage("Lenna.png"); /* Loading of image "image.jpg" */
+	success = ilLoadImage(path); /* Loading of image "image.jpg" */
 	ILenum Error;
 	while ((Error = ilGetError()) != IL_NO_ERROR) {
 		//LOG("%d: s/n ", Error, gluErrorString(Error));
@@ -57,9 +56,18 @@ bool ModuleTexture::Init()
 	else {
 		return false;
 	}
-	
 	ilDeleteImages(1, &texid); /* Because we have already copied image data into texture data
 	 // we can release memory used by image. */
+	return image;
+}
+// Called before render is available
+bool ModuleTexture::Init()
+{
+
+	ilInit(); /* Initialization of DevIL */
+	ilEnable(IL_ORIGIN_SET);
+	ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+	
 	return true;
 }
 

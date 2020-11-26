@@ -1,10 +1,9 @@
 #pragma once
-#include "ImGU/imgui.h"
-
+#include "imgui.h"
 class DefaultImGuiWindow
 {
 public:
-    DefaultImGuiWindow(const char* _title, ImGuiWindowFlags _window_flags) : title(_title) , window_flags(_window_flags) {
+    DefaultImGuiWindow(const char* _title, ImGuiWindowFlags _windowFlags) : title(_title) , window_flags(_windowFlags) {
         show = true;
     }
     ~DefaultImGuiWindow();
@@ -14,6 +13,14 @@ public:
         return show;
     }
     ImGuiWindowFlags window_flags;
+
+    void toggleWindow(){
+        show = !show;
+    }
+
+    void setShowWindow(const bool showWindow){
+        show = showWindow;
+    }
 
 protected:
     bool begin();

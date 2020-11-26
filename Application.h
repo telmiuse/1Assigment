@@ -1,5 +1,4 @@
 #pragma once
-
 #include<list>
 #include "Globals.h"
 #include "Module.h"
@@ -14,6 +13,7 @@ class ModuleExTriangle;
 class Program;
 class ModuleTexture;
 class ModuleEditor;
+class ModuleModelo;
 
 class Application
 {
@@ -35,6 +35,8 @@ public:
 	Program* program = nullptr;
 	ModuleTexture* texture = nullptr;
 	ModuleEditor* editor = nullptr;
+	ModuleModelo* modelo = nullptr;
+
 	void RequestBrowser(const char* route);
 
 private:
