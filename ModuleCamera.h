@@ -14,9 +14,9 @@ struct SDL_Rect;
 
 class ModuleCamera : public Module
 {
-public: 
+public:
 	float Speed = 0.2f;
-	
+
 
 public:
 	ModuleCamera();
@@ -27,6 +27,9 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+	float4x4 proj;
+	float4x4 model;
+	float4x4 view;
 
 	const float4x4 GetView() {
 		return frustum.ViewMatrix();
@@ -42,10 +45,17 @@ public:
 	void MoveRight();
 	void RotateArrows();
 	void MouseRotate();
-	
+	void Focus();
+	void SetFOV(float fov);
+	void SetAspectRatio();
+	void RecalculateRot(float3& vec);
 
-protected:
+	void ShowGrid();
+	void ShowAxis();
+
 	Frustum frustum;
+protected:
+	//Frustum frustum;
 	float movement_speed;
 	float turn_speed;
 	float pitch_angle;

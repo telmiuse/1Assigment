@@ -74,15 +74,15 @@ public:
 	bool GetWindowEvent(EventWindow code) const;
 
 	// Get mouse / axis position
-	const iPoint& GetMouseMotion() const;
-	const iPoint& GetMousePosition() const;
-
+	const float2& GetMousePosition() const;
+	const float2& GetMouseMotion() const;
+	std::string dropped_filedir;
 private:
 	bool		windowEvents[WE_COUNT];
 	KeyState*	keyboard;
 	KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
-	iPoint mouse_motion;
-	iPoint mouse;
+	float2 mouse_motion;
+	float2 mouse;
 	MouseWheel scr;
 };
 

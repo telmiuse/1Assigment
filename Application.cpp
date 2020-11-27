@@ -1,4 +1,5 @@
 #pragma once
+#include "MolduleIMGUI.h"
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
@@ -22,13 +23,14 @@ Application::Application()
 	modules.push_back(window = new ModuleWindow());
 	modules.push_back(renderer = new ModuleRender());
 	modules.push_back(input = new ModuleInput());
-	modules.push_back(Camera = new ModuleCamera());
 	modules.push_back(program = new Program());
-	modules.push_back(editor = new ModuleEditor());
+	//modules.push_back(editor = new ModuleEditor());
+	modules.push_back(Camera = new ModuleCamera());
 	modules.push_back(texture = new ModuleTexture());
+	modules.push_back(Triangle = new ModuleExTriangle());
+	modules.push_back(imgui = new ModuleIMGUI());
 	modules.push_back(modelo = new ModuleModelo());
 
-	modules.push_back(Triangle = new ModuleExTriangle());
 
 
 

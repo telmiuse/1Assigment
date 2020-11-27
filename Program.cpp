@@ -41,6 +41,7 @@ update_status Program::PostUpdate()
 // Called before quitting
 bool Program::CleanUp()
 {
+
 	return true;
 }
 
@@ -92,16 +93,16 @@ unsigned Program::CompileShader(unsigned type, const char* source)
 
 unsigned Program::CreateProgram(unsigned vtx_shader, unsigned frg_shader)
 {
-	unsigned program_id = glCreateProgram();
-	glAttachShader(program_id, vtx_shader);
-	glAttachShader(program_id, frg_shader);
-	glLinkProgram(program_id);
+	ProgramID = glCreateProgram();
+	glAttachShader(ProgramID, vtx_shader);
+	glAttachShader(ProgramID, frg_shader);
+	glLinkProgram(ProgramID);
 	int res;
-	glGetProgramiv(program_id, GL_LINK_STATUS, &res);
+	glGetProgramiv(ProgramID, GL_LINK_STATUS, &res);
 	if (res == GL_FALSE)
 	{
 		int len = 0;
-		glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &len);
+		glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &len);
 		if (len > 0)
 		{
 			int written = 0;
@@ -113,5 +114,5 @@ unsigned Program::CreateProgram(unsigned vtx_shader, unsigned frg_shader)
 	}
 	glDeleteShader(vtx_shader);
 	glDeleteShader(frg_shader);
-	return program_id;
+	return ProgramID;
 }

@@ -19,12 +19,13 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void WindowResized(unsigned width, unsigned height);
+	GLuint program;
 
-	void* GetContext() {
-		return context;
-	}
+	void* context;
+	
 
 private:
-	void* context;
-
+	unsigned vbo;
+	GLuint vtx_shader;
+	GLuint frg_shader;
 };

@@ -41,7 +41,7 @@ bool ModuleEditor::Init()
 
     SetStyle(io);
     // Setup Platform/Renderer backends
-    ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer->GetContext());
+    ImGui_ImplSDL2_InitForOpenGL(App->window->window, App->renderer->context);
     ImGui_ImplOpenGL3_Init();
 
     return true;

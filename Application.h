@@ -14,6 +14,7 @@ class Program;
 class ModuleTexture;
 class ModuleEditor;
 class ModuleModelo;
+class ModuleIMGUI;
 
 class Application
 {
@@ -36,6 +37,7 @@ public:
 	ModuleTexture* texture = nullptr;
 	ModuleEditor* editor = nullptr;
 	ModuleModelo* modelo = nullptr;
+	ModuleIMGUI* imgui = nullptr;
 
 	void RequestBrowser(const char* route);
 

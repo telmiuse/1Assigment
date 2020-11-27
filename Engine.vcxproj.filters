@@ -9,7 +9,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleExTriangle.cpp" />
-    <ClCompile Include="Program.cpp" />
     <ClCompile Include="ModuleDebugDraw.cpp" />
     <ClCompile Include="MathGeoLib\Algorithm\GJK.cpp">
       <Filter>MathGeoLib</Filter>
@@ -139,7 +138,6 @@
     </ClCompile>
     <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="ModuleEditor.cpp" />
-    <ClCompile Include="ModuleMalla.cpp" />
     <ClCompile Include="ModuleModelo.cpp" />
     <ClCompile Include="ConfigurationWindow.cpp">
       <Filter>ImGu\GR</Filter>
@@ -168,6 +166,8 @@
     <ClCompile Include="ImGU\imgui_widgets.cpp">
       <Filter>ImGu</Filter>
     </ClCompile>
+    <ClCompile Include="Program.cpp" />
+    <ClCompile Include="MolduleIMGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -420,7 +420,6 @@
     <ClInclude Include="ConfigurationWindow.h">
       <Filter>ImGu\GR</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleMalla.h" />
     <ClInclude Include="ModuleModelo.h" />
     <ClInclude Include="ConsoleWindow.h">
       <Filter>ImGu\GR</Filter>
@@ -935,6 +934,7 @@
     <ClInclude Include="C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\shellapi.h">
       <Filter>assimp</Filter>
     </ClInclude>
+    <ClInclude Include="MolduleIMGUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">

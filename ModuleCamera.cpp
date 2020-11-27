@@ -1,4 +1,5 @@
-
+#include "ModuleExTriangle.h"
+#include "ModuleModelo.h"
 #include "Application.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
@@ -26,9 +27,9 @@ ModuleCamera::~ModuleCamera()
 // Called before render is available
 bool ModuleCamera::Init()
 {
-	 NOW = SDL_GetTicks();
-	 LAST = 0;
-	 deltaTime = 0;
+	NOW = SDL_GetTicks();
+	LAST = 0;
+	deltaTime = 0;
 
 	camera_position = float3(0, 1, -2);
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
@@ -52,7 +53,7 @@ update_status ModuleCamera::PreUpdate()
 	LAST = NOW;
 	NOW = SDL_GetTicks();
 
-	deltaTime = (double)((NOW - LAST)/1000);
+	deltaTime = (double)((NOW - LAST) / 1000);
 	double aux = deltaTime;
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(*(projectionGL.v));
@@ -92,7 +93,7 @@ void ModuleCamera::MouseRotate() {
 			Rotate(frustum.WorldMatrix().RotatePart().RotateY(-pitch_angle * deltaTime));
 		}
 		if ((mousexoldNow - mouseXnow) > 0) {
-			Rotate(frustum.WorldMatrix().RotatePart().RotateY(+pitch_angle  * deltaTime) );
+			Rotate(frustum.WorldMatrix().RotatePart().RotateY(+pitch_angle * deltaTime));
 		}
 
 
@@ -178,9 +179,9 @@ void ModuleCamera::MoveRight() {
 	}
 }
 
-void ModuleCamera:: MoveForward() {
+void ModuleCamera::MoveForward() {
 
-		/**Rendering**/
+	/**Rendering**/
 
 	if (App->input->GetScrool() == SCROOL_UP) {
 		frustum.Translate(frustum.Front() * -Speed * deltaTime);
@@ -244,3 +245,71 @@ void ModuleCamera::Rotate(const float3x3 rotation_matrix)
 
 }
 
+
+void ModuleCamera::SetFOV(float fov)
+{
+	frustum.verticalFov = fov;
+	SetAspectRatio();
+	proj = frustum.ProjectionMatrix();
+}
+void ModuleCamera::SetAspectRatio()
+{
+	frustum.horizontalFov = 2.0f * atanf(tanf(frustum.verticalFov * 0.5f) * ((float)App->window->width / App->window->height));
+}
+
+void ModuleCamera::Focus()
+{
+	frustum.pos = App->modelo->boundingBox.CenterPoint() - App->modelo->boundingBox.Size().Normalize() * frustum.front;
+	frustum.front = -float3::unitZ;
+	frustum.up = float3::unitY;
+	App->Camera->view = frustum.ViewMatrix();
+}
+
+void ModuleCamera::ShowGrid()
+{
+	glLineWidth(1.0f);
+	float d = 200.0f;
+	glBegin(GL_LINES);
+	for (float i = -d; i <= d; i += 1.0f)
+	{
+		glVertex3f(i, 0.0f, -d);
+		glVertex3f(i, 0.0f, d);
+		glVertex3f(-d, 0.0f, i);
+		glVertex3f(d, 0.0f, i);
+	}
+	glEnd();
+}
+
+void ModuleCamera::ShowAxis()
+{
+	glBegin(GL_LINES);
+	// red X 
+	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.1f, 0.0f);
+	glVertex3f(1.1f, -0.1f, 0.0f);
+	glVertex3f(1.1f, 0.1f, 0.0f);
+	glVertex3f(1.0f, -0.1f, 0.0f);
+	// green Y 
+	glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-0.05f, 1.25f, 0.0f);
+	glVertex3f(0.0f, 1.15f, 0.0f);
+	glVertex3f(0.05f, 1.25f, 0.0f);
+	glVertex3f(0.0f, 1.15f, 0.0f);
+	glVertex3f(0.0f, 1.15f, 0.0f);
+	glVertex3f(0.0f, 1.05f, 0.0f);
+	// blue Z 
+	glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(-0.05f, 0.1f, 1.05f);
+	glVertex3f(0.05f, 0.1f, 1.05f);
+	glVertex3f(0.05f, 0.1f, 1.05f);
+	glVertex3f(-0.05f, -0.1f, 1.05f);
+	glVertex3f(-0.05f, -0.1f, 1.05f);
+	glVertex3f(0.05f, -0.1f, 1.05f);
+	glEnd();
+}

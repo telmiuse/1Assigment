@@ -1,7 +1,11 @@
 #include "ModuleRender.h"
 #include "Globals.h"
+#include "MolduleIMGUI.h"
+#include "ModuleExTriangle.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleModelo.h"
+#include "ModuleTexture.h"
 #include "SDL/include/SDL.h"
 #include "ImGu/imgui_impl_sdl.h"
 
@@ -17,7 +21,7 @@ ModuleInput::ModuleInput() : Module(), mouse({ 0, 0 }), mouse_motion({ 0,0 })
 // Destructor
 ModuleInput::~ModuleInput()
 {
-	RELEASE_ARRAY(keyboard);
+	//RELEASE_ARRAY(keyboard);
 }
 
 // Called before render is available
@@ -36,11 +40,7 @@ bool ModuleInput::Init()
 	return ret;
 }
 
-// Called before the first frame
-bool ModuleInput::Start()
-{
-	return true;
-}
+
 
 // Called each loop iteration
 update_status ModuleInput::PreUpdate()
@@ -80,7 +80,6 @@ update_status ModuleInput::PreUpdate()
 	}
 
 
-	scr = SCROOL_STAY;
 
 	while (SDL_PollEvent(&event) != 0)
 	{
@@ -126,6 +125,38 @@ update_status ModuleInput::PreUpdate()
 			mouse.y = event.motion.y / SCREEN_SIZE;
 			break;
 
+		case SDL_DROPFILE:
+			App->imgui->AddLog("FILE DROPPED from:%s\n", event.drop.file);
+			//App->imgui->AddLogInput("Input: Drag & Drop File\n");
+			dropped_filedir = event.drop.file;
+			if (dropped_filedir.substr(dropped_filedir.find_last_of(".") + 1) == "fbx")
+			{
+				App->imgui->AddLog("MODEL DROPPED from:%s\n", event.drop.file);
+				App->modelo->LoadModel(dropped_filedir.c_str());
+				for (unsigned int i = 0; i < App->modelo->meshes.size(); i++)
+				{
+					App->Triangle->SetUpMesh(App->modelo->meshes[i]);
+				}
+				App->texture->LoadTexture("Textures/checkers.png");
+			}
+			else if (dropped_filedir.substr(dropped_filedir.find_last_of(".") + 1) == "png")
+			{
+				App->imgui->AddLog("TEXTURE DROPPED from:%s\n", event.drop.file);
+				Texture text = App->texture->LoadTexture(dropped_filedir.c_str());
+				for (int i = 0; i < App->modelo->meshes.size(); i++)
+				{
+					App->modelo->meshes[i].textures.clear();
+					App->modelo->meshes[i].textures.push_back(text);
+				}
+
+			}
+			else
+			{
+				App->imgui->AddLog("Not Supported file drop");
+			}
+			SDL_free(event.drop.file);
+			break;
+		
 		case SDL_MOUSEWHEEL:
 			if (event.wheel.y < 0) // scroll up
 			{
@@ -163,12 +194,14 @@ bool ModuleInput::GetWindowEvent(EventWindow ev) const
 	return windowEvents[ev];
 }
 
-const iPoint& ModuleInput::GetMousePosition() const
+const float2& ModuleInput::GetMousePosition() const
 {
 	return mouse;
 }
 
-const iPoint& ModuleInput::GetMouseMotion() const
+
+
+const float2& ModuleInput::GetMouseMotion() const
 {
 	return mouse_motion;
 }
