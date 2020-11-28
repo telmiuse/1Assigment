@@ -167,7 +167,7 @@
       <Filter>ImGu</Filter>
     </ClCompile>
     <ClCompile Include="Program.cpp" />
-    <ClCompile Include="MolduleIMGUI.cpp" />
+    <ClCompile Include="ModuleIMGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -934,7 +934,7 @@
     <ClInclude Include="C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\shellapi.h">
       <Filter>assimp</Filter>
     </ClInclude>
-    <ClInclude Include="MolduleIMGUI.h" />
+    <ClInclude Include="ModuleIMGUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">

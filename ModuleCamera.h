@@ -30,7 +30,8 @@ public:
 	float4x4 proj;
 	float4x4 model;
 	float4x4 view;
-
+	float3 camera_position;
+	Frustum frustum;
 	const float4x4 GetView() {
 		return frustum.ViewMatrix();
 	};
@@ -47,19 +48,19 @@ public:
 	void MouseRotate();
 	void Focus();
 	void SetFOV(float fov);
-	void SetAspectRatio();
+	void SetAspectRatio( float radio );
 	void RecalculateRot(float3& vec);
+	void RotateCam(const float xAxis, const float yAxis);
+	void OrbitCam(const float xAxis, const float yAxis);
+	float4x4 LookAt(float3, float3, float3);
 
-	void ShowGrid();
-	void ShowAxis();
 
-	Frustum frustum;
 protected:
 	//Frustum frustum;
 	float movement_speed;
 	float turn_speed;
 	float pitch_angle;
-	float3 camera_position;
+	//float3 camera_position;
 	double NOW;
 	double LAST;
 	double deltaTime;

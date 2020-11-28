@@ -2,7 +2,9 @@
 #include <GL/glew.h>
 #include "ModuleWindow.h"
 #include "SDL.h"
-
+#include "ModuleIMGUI.h"
+#include "Application.h"
+#include "ModuleExTriangle.h"
 using namespace std;
 
 
@@ -43,6 +45,8 @@ bool Program::CleanUp()
 {
 
 	return true;
+
+
 }
 
 
@@ -114,5 +118,7 @@ unsigned Program::CreateProgram(unsigned vtx_shader, unsigned frg_shader)
 	}
 	glDeleteShader(vtx_shader);
 	glDeleteShader(frg_shader);
+
+
 	return ProgramID;
 }

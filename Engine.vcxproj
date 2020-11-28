@@ -317,7 +317,7 @@
     <ClInclude Include="ModuleEditor.h" />
     <ClInclude Include="ModuleExTriangle.h" />
     <ClInclude Include="ModuleTexture.h" />
-    <ClInclude Include="MolduleIMGUI.h" />
+    <ClInclude Include="ModuleIMGUI.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleCamera.h" />
@@ -475,7 +475,7 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleTexture.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
-    <ClCompile Include="MolduleIMGUI.cpp" />
+    <ClCompile Include="ModuleIMGUI.cpp" />
     <ClCompile Include="Program.cpp" />
   </ItemGroup>
   <ItemGroup>

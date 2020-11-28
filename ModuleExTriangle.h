@@ -15,6 +15,8 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+	unsigned vtx_shader;
+	unsigned frg_shader;
 
 private:
 	GLuint vbo, vao, ebo;

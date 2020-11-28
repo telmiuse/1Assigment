@@ -4,6 +4,7 @@
 #include "Program.h"
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
+#include "ModuleCamera.h"
 #include "ModuleModelo.h"
 #include <SDL.h>
 #include <SDL_opengl.h>
@@ -11,7 +12,7 @@
 #include <IL/il.h>
 #include <GL/gl.h>
 #include <GL/glew.h>
-
+#include "ModuleIMGUI.h"
 
 void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
@@ -90,6 +91,12 @@ bool ModuleRender::Init()
 
 update_status ModuleRender::PreUpdate()
 {
+//	SDL_GetWindowSize(App->window->window, &(App->window->width), &(App->window->height));
+	float newHight = (App->window->width / 2.3) ;
+	glViewport(0, 0, App->window->width, App->window->height);
+	App->Camera->SetFOV(newHight);
+	//App->Camera->SetAspectRatio(newHight);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	return UPDATE_CONTINUE;
 }
 
@@ -101,7 +108,7 @@ update_status ModuleRender::Update()
 	int w = 0;
 	int h = 0;
 	SDL_GetWindowSize(App->window->window, &w, &h);
-	glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
+	glClearColor(0.f, 0.f, 0.f, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLineWidth(1.0f);
@@ -150,7 +157,7 @@ update_status ModuleRender::Update()
 	glEnd();
 	glLineWidth(1.0f);
 
-	//App->modelo->Draw();
+
 	return UPDATE_CONTINUE;
 }
 

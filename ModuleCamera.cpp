@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
+#include "ModuleIMGUI.h"
 #include "MathGeoLib/Math/float3x3.h"
 #include "ModuleInput.h"
 #include <GL/glew.h>
@@ -31,7 +32,7 @@ bool ModuleCamera::Init()
 	LAST = 0;
 	deltaTime = 0;
 
-	camera_position = float3(0, 1, -2);
+	camera_position = float3(0, 1, 10);
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
 	frustum.SetViewPlaneDistances(0.1f, 200.0f);
 	frustum.SetHorizontalFovAndAspectRatio(DEGTORAD(1) * 90.0f, 1.3f);
@@ -64,12 +65,26 @@ update_status ModuleCamera::PreUpdate()
 	RotateArrows();
 
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT) {
-		Speed = 4.0f;
+		Speed = 16.0f;
 	}
 	else {
-		Speed = 2.0;
+		Speed = 8.0;
 	}
 
+
+	if (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT && App->input->GetMouseButtonDown(SDL_BUTTON(SDL_BUTTON_LEFT)))
+	{
+
+		App->imgui->AddLogInput("Input: Left ALT Keyboard & Left Mouse\n");
+		float2 move = App->input->GetMouseMotion();
+		OrbitCam(40, 40);
+
+	}
+	if (App->input->GetKey(SDL_SCANCODE_F))
+	{
+		App->imgui->AddLogInput("Input: F Keyboard\n");
+		Focus();
+	}
 
 	frustum.SetPos(camera_position);
 	float4x4 viewMatrix = frustum.ViewMatrix();
@@ -83,9 +98,6 @@ update_status ModuleCamera::PreUpdate()
 void ModuleCamera::MouseRotate() {
 
 	if (App->input->GetMouseButtonDown(3) == KEY_REPEAT) {
-
-
-
 		int aux = App->input->GetMouseMotion().x;
 		int mousexoldNow = App->input->GetMousePosition().x;
 		int mouseXnow = aux + mousexoldNow;
@@ -96,16 +108,12 @@ void ModuleCamera::MouseRotate() {
 			Rotate(frustum.WorldMatrix().RotatePart().RotateY(+pitch_angle * deltaTime));
 		}
 
-
-
-
-
 		int auxy = App->input->GetMouseMotion().y;
 		int mouseyoldNow = App->input->GetMousePosition().y;
 		int mouseynow = auxy + mouseyoldNow;
 		if ((mouseyoldNow - mouseynow) > 0) {
 
-			float radians_angle = DEGTORAD(pitch_angle) * deltaTime;
+			float radians_angle = DEGTORAD(80.0f) * deltaTime;
 			float3 lookAtVector = frustum.Front() * cos(radians_angle) + frustum.Up() * sin(radians_angle);
 			lookAtVector.Normalize();
 
@@ -115,7 +123,7 @@ void ModuleCamera::MouseRotate() {
 		}
 		if ((mouseyoldNow - mouseynow) < 0) {
 
-			float radians_angle = DEGTORAD(pitch_angle) * deltaTime;
+			float radians_angle = DEGTORAD(80.0f) * deltaTime;
 			float3 lookAtVector = frustum.Front() * cos(-radians_angle) + frustum.Up() * sin(-radians_angle);
 			lookAtVector.Normalize();
 
@@ -123,9 +131,45 @@ void ModuleCamera::MouseRotate() {
 			frustum.SetFront(lookAtVector);
 			frustum.SetUp(upVector);
 		}
+	}
+}
+
+
+
+void ModuleCamera::RotateCam(const float xAxis, const float yAxis)
+{
+	if (xAxis != 0.0f)
+	{
+		float3x3 rotY = float3x3::RotateY(xAxis);
+		frustum.front = rotY.Transform(frustum.front).Normalized();
+		frustum.up = rotY.Transform(frustum.up).Normalized();
+	}
+	if (yAxis != 0.0f)
+	{
+		float3x3 rotX = float3x3::RotateAxisAngle(frustum.WorldRight(), yAxis);
+		frustum.up = rotX.Transform(frustum.up).Normalized();
+		frustum.front = rotX.Transform(frustum.front).Normalized();
+	}
+}
+
+void ModuleCamera::OrbitCam(const float xAxis, const float yAxis)
+{
+	if (xAxis != 0.0f)
+	{
+		float3x3 rot = float3x3::RotateY(xAxis);
+		frustum.pos = rot.Transform(frustum.pos - App->modelo->centerPoint) + App->modelo->centerPoint;
+		//frustum.front = rot.Transform(frustum.front).Normalized();
 
 	}
-
+	if (yAxis != 0.0f)
+	{
+		float3x3 rot = float3x3::RotateX(yAxis);
+		frustum.pos = rot.Transform(frustum.pos - App->modelo->centerPoint) + App->modelo->centerPoint;
+		//frustum.front = rot.Transform(frustum.front).Normalized();
+	}
+	LookAt(frustum.pos, App->modelo->centerPoint, frustum.up);
+	/*proj = frustum.ProjectionMatrix();
+	view = frustum.ViewMatrix();*/
 }
 
 void ModuleCamera::RotateArrows() {
@@ -141,7 +185,7 @@ void ModuleCamera::RotateArrows() {
 		LOG("Up");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN)) {
-		float radians_angle = DEGTORAD(pitch_angle * deltaTime);
+		float radians_angle = DEGTORAD(40.0f * deltaTime);
 		float3 lookAtVector = frustum.Front() * cos(-radians_angle) + frustum.Up() * sin(-radians_angle);
 		float aux = lookAtVector.Normalize();
 
@@ -155,11 +199,11 @@ void ModuleCamera::RotateArrows() {
 
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT) {
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY(pitch_angle * deltaTime));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY(pitch_angle * Speed * deltaTime));
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT) {
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY(-pitch_angle * deltaTime));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY(-pitch_angle * Speed * deltaTime));
 	}
 
 }
@@ -176,6 +220,9 @@ void ModuleCamera::MoveRight() {
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		frustum.Translate(frustum.WorldRight() * -Speed * deltaTime);
 		camera_position = frustum.Pos();
+	}
+	else {
+		RotateCam(0.0f, 0.0f);
 	}
 }
 
@@ -242,17 +289,15 @@ void ModuleCamera::Rotate(const float3x3 rotation_matrix)
 	frustum.SetFront(rotation_matrix.MulDir(oldFront));
 	vec oldUp = frustum.Up().Normalized();
 	frustum.SetUp(rotation_matrix.MulDir(oldUp));
-
 }
-
 
 void ModuleCamera::SetFOV(float fov)
 {
 	frustum.verticalFov = fov;
-	SetAspectRatio();
+	SetAspectRatio(fov);
 	proj = frustum.ProjectionMatrix();
 }
-void ModuleCamera::SetAspectRatio()
+void ModuleCamera::SetAspectRatio(float fov)
 {
 	frustum.horizontalFov = 2.0f * atanf(tanf(frustum.verticalFov * 0.5f) * ((float)App->window->width / App->window->height));
 }
@@ -265,51 +310,29 @@ void ModuleCamera::Focus()
 	App->Camera->view = frustum.ViewMatrix();
 }
 
-void ModuleCamera::ShowGrid()
-{
-	glLineWidth(1.0f);
-	float d = 200.0f;
-	glBegin(GL_LINES);
-	for (float i = -d; i <= d; i += 1.0f)
-	{
-		glVertex3f(i, 0.0f, -d);
-		glVertex3f(i, 0.0f, d);
-		glVertex3f(-d, 0.0f, i);
-		glVertex3f(d, 0.0f, i);
-	}
-	glEnd();
-}
+float4x4 ModuleCamera::LookAt(float3 eye, float3 target, float3 up) {
+	math::float3 f(target - eye);
+	f.Normalize();
+	math::float3 s(f.Cross(up));
+	s.Normalize();
+	math::float3 u(s.Cross(f));
+	float4x4 matrix;
+	matrix[0][0] = s.x;
+	matrix[0][1] = s.y;
+	matrix[0][2] = s.z;
+	matrix[1][0] = u.x;
+	matrix[1][1] = u.y;
+	matrix[1][2] = u.z;
+	matrix[2][0] = -f.x;
+	matrix[2][1] = -f.y;
+	matrix[2][2] = -f.z;
+	matrix[0][3] = -s.Dot(eye);
+	matrix[1][3] = -u.Dot(eye);
+	matrix[2][3] = f.Dot(eye);
+	matrix[3][0] = 0.0f;
+	matrix[3][1] = 0.0f;
+	matrix[3][2] = 0.0f;
+	matrix[3][3] = 1.0f;
 
-void ModuleCamera::ShowAxis()
-{
-	glBegin(GL_LINES);
-	// red X 
-	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.1f, 0.0f);
-	glVertex3f(1.1f, -0.1f, 0.0f);
-	glVertex3f(1.1f, 0.1f, 0.0f);
-	glVertex3f(1.0f, -0.1f, 0.0f);
-	// green Y 
-	glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-0.05f, 1.25f, 0.0f);
-	glVertex3f(0.0f, 1.15f, 0.0f);
-	glVertex3f(0.05f, 1.25f, 0.0f);
-	glVertex3f(0.0f, 1.15f, 0.0f);
-	glVertex3f(0.0f, 1.15f, 0.0f);
-	glVertex3f(0.0f, 1.05f, 0.0f);
-	// blue Z 
-	glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-0.05f, 0.1f, 1.05f);
-	glVertex3f(0.05f, 0.1f, 1.05f);
-	glVertex3f(0.05f, 0.1f, 1.05f);
-	glVertex3f(-0.05f, -0.1f, 1.05f);
-	glVertex3f(-0.05f, -0.1f, 1.05f);
-	glVertex3f(0.05f, -0.1f, 1.05f);
-	glEnd();
+	return matrix;
 }

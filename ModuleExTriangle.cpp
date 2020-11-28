@@ -6,7 +6,7 @@
 #include "ModuleTexture.h"
 #include "ModuleCamera.h"
 #include "ModuleModelo.h"
-#include "MolduleIMGUI.h"
+#include "ModuleIMGUI.h"
 #include <string>
 
 ModuleExTriangle::ModuleExTriangle()
@@ -89,6 +89,7 @@ void ModuleExTriangle::SetUpMesh(Mesh mesh)
 	glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
 
 	glBindVertexArray(0);
+
 }
 
 bool ModuleExTriangle::Init() {
@@ -97,8 +98,8 @@ bool ModuleExTriangle::Init() {
 	{
 		SetUpMesh(App->modelo->meshes[i]);
 	}
-	unsigned vtx_shader = App->program->CompileShader(GL_VERTEX_SHADER, (App->program->LoadShaderSource("vertex.glsl")));
-	unsigned frg_shader = App->program->CompileShader(GL_FRAGMENT_SHADER, (App->program->LoadShaderSource("fragment.glsl")));
+	vtx_shader = App->program->CompileShader(GL_VERTEX_SHADER, (App->program->LoadShaderSource("vertex.glsl")));
+	frg_shader = App->program->CompileShader(GL_FRAGMENT_SHADER, (App->program->LoadShaderSource("fragment.glsl")));
 	App->program->CreateProgram(vtx_shader, frg_shader);
 	App->texture->LoadTexture("Textures/Baker_housse.png");
 	return true;
@@ -149,6 +150,15 @@ bool ModuleExTriangle::CleanUp()
 	glDeleteVertexArrays(1, &vao);
 	glDeleteBuffers(1, &vbo);
 	glDeleteBuffers(1, &ebo);
+
+	App->imgui->AddLog("Destroying program");
+
+	//Destroy window
+	glDetachShader(App->program->ProgramID,vtx_shader);
+	glDetachShader(App->program->ProgramID, frg_shader);
+	glDeleteShader(vtx_shader);
+	glDeleteShader(frg_shader);
+	glDeleteProgram(App->program->ProgramID);
 	//Destroy window
 	return true;
 }

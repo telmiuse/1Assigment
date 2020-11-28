@@ -1,5 +1,6 @@
 #include "ModuleRender.h"
 #include "Globals.h"
+#include "ModuleWindow.h"
 #include "MolduleIMGUI.h"
 #include "ModuleExTriangle.h"
 #include "Application.h"
@@ -46,7 +47,7 @@ bool ModuleInput::Init()
 update_status ModuleInput::PreUpdate()
 {
 	static SDL_Event event;
-
+	scr = SCROOL_STAY;
 	mouse_motion = { 0, 0 };
 	memset(windowEvents, false, WE_COUNT * sizeof(bool));
 
@@ -106,6 +107,14 @@ update_status ModuleInput::PreUpdate()
 			case SDL_WINDOWEVENT_MAXIMIZED:
 			case SDL_WINDOWEVENT_RESTORED:
 				windowEvents[WE_SHOW] = true;
+				break;
+			case SDL_WINDOWEVENT_RESIZED:
+				App->window->Rescale(event.window.data1, event.window.data2);
+				//App->imgui->AddLogInput("Input: Resize window\n");
+				break;
+			case SDL_WINDOWEVENT_SIZE_CHANGED:
+				App->window->Rescale(event.window.data1, event.window.data2);
+				//App->imgui->AddLogInput("Input: Resize window\n");
 				break;
 			}
 			break;
