@@ -2,7 +2,7 @@
 3D Game Engine
 Author: Telm Francesc Serra Malagrava
 
-[GitHub Link](https://github.com/telmiuse/1Assigment)
+[alt tex](https://github.com/telmiuse/1Assigment)
 
 Models: BakerHouse.fbx , Fox.fbx , Totoro.fbx
 
