@@ -110,7 +110,7 @@ update_status ModuleIMGUI::Update()
 	}
 
 	if (Git) {
-		App->RequestBrowser("https://github.com/saulzini/Engine/releases");
+		App->RequestBrowser("https://github.com/telmiuse/1Assigment");
 		Git = false;
 	}
 	//Show Camera controls window.
