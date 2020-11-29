@@ -7,12 +7,12 @@ Author: Telm Francesc Serra Malagrava
 Models: BakerHouse.fbx , Fox.fbx , Totoro.fbx
 
 
-##Instructions:
+###Instructions:
 1.	 The engine start with the BakerHouse Module
 2.	 Inside the Folder "Modules" u can choose one of them, same for textures in the folder "Textures"
 3.	 Drag&Drop its allowed
 
-## Key Inputs
+### Key Inputs
 -	Window Control
 	· Quit Application - Hit Escape Keyboard Key, "X" on Window LeftMouseCLick
 	· Resize Window Drag & Drop Sides of Application Window.
