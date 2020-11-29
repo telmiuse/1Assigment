@@ -3,8 +3,7 @@
 Author: Telm Francesc Serra Malagrava
 
 For our first assignment, we aim to deliver a simple geometry viewer supporting drag and drop and orbital
-camera. The final release should load the provided model (baker_house.zip) plus other models of your
-choice.
+camera. 
 
 ![alt tex](https://github.com/telmiuse/1Assigment/blob/main/EngineReal/giT.PNG)
 
