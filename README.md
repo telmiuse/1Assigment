@@ -2,6 +2,10 @@
 3D Game Engine
 Author: Telm Francesc Serra Malagrava
 
+For our first assignment, we aim to deliver a simple geometry viewer supporting drag and drop and orbital
+camera. The final release should load the provided model (baker_house.zip) plus other models of your
+choice.
+
 ![alt tex](https://github.com/telmiuse/1Assigment/blob/main/EngineReal/giT.PNG)
 
 Models: BakerHouse.fbx , Fox.fbx , Totoro.fbx
@@ -27,7 +31,6 @@ Models: BakerHouse.fbx , Fox.fbx , Totoro.fbx
 
       2. Around Model's Axis (X, Y) Move Mouse (Left/Right, Up/Down) accordingly, ONLY when Left Mouse Click & Left ALT Keyboard Key.
  
-   - Focus Camera on Loaded Model Press F Keyboard Key 
 
    - Zoom Camera In/Out Mouse Scroll Button Up/Down
 
@@ -41,7 +44,7 @@ Models: BakerHouse.fbx , Fox.fbx , Totoro.fbx
  
 - Main Menu
 
-   - Visit Github Page of Application - "Visit Github page" Option.
+   - Visit Github Page of Documentation - "GitHube" Option.
 
    - Quit Application - Hit Quit Option.
 
