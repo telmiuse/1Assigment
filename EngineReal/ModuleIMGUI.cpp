@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
-#include "ModuleModelo.h"
+#include "ModuleModel.h"
 #include "ModuleCamera.h"
 #include "ModuleTexture.h"
 #include "ModuleInput.h"
@@ -14,7 +14,7 @@
 #include "./IL/il.h"
 #include "Globals.h"
 #include "GL/glew.h"
-
+#include "Leaks.h"
 #include <string>
 #include <iostream>
 #include <filesystem>
@@ -93,6 +93,11 @@ update_status ModuleIMGUI::Update()
 		ImGui::MenuItem("Configurations Window", NULL, &config_window);
 		ImGui::EndMenu();
 	}
+	if (ImGui::BeginMenu("Documentation"))
+	{
+		ImGui::MenuItem("GitHub", NULL, &Git);
+		ImGui::EndMenu();
+	}
 	ImGui::EndMainMenuBar();
 
 	if (quit)
@@ -104,6 +109,10 @@ update_status ModuleIMGUI::Update()
 		ImGui::ShowDemoWindow(&show_demo_window);
 	}
 
+	if (Git) {
+		App->RequestBrowser("https://github.com/saulzini/Engine/releases");
+		Git = false;
+	}
 	//Show Camera controls window.
 	if (show_another_window)
 	{
@@ -148,35 +157,35 @@ update_status ModuleIMGUI::Update()
 		if (ImGui::TreeNode("Transformation"))
 		{
 			ImGui::Text("Position");
-			ImGui::Text("X: %.2f\t", App->modelo->modelPos.x);
+			ImGui::Text("X: %.2f\t", App->model->modelPos.x);
 			ImGui::SameLine();
-			ImGui::Text("Y: %.2f\t", App->modelo->modelPos.y);
+			ImGui::Text("Y: %.2f\t", App->model->modelPos.y);
 			ImGui::SameLine();
-			ImGui::Text("Z: %.2f\t", App->modelo->modelPos.z);
+			ImGui::Text("Z: %.2f\t", App->model->modelPos.z);
 
 			ImGui::Text("Rotation");
-			ImGui::Text("X: %.2f\t", App->modelo->rotation.x);
+			ImGui::Text("X: %.2f\t", App->model->rotation.x);
 			ImGui::SameLine();
-			ImGui::Text("Y: %.2f\t", App->modelo->rotation.y);
+			ImGui::Text("Y: %.2f\t", App->model->rotation.y);
 			ImGui::SameLine();
-			ImGui::Text("Z: %.2f\t", App->modelo->rotation.z);
+			ImGui::Text("Z: %.2f\t", App->model->rotation.z);
 
 			ImGui::Text("Scale");
-			ImGui::Text("X: %.2f\t", App->modelo->scale.x);
+			ImGui::Text("X: %.2f\t", App->model->scale.x);
 			ImGui::SameLine();
-			ImGui::Text("Y: %.2f\t", App->modelo->scale.y);
+			ImGui::Text("Y: %.2f\t", App->model->scale.y);
 			ImGui::SameLine();
-			ImGui::Text("Z: %.2f\t", App->modelo->scale.z);
+			ImGui::Text("Z: %.2f\t", App->model->scale.z);
 			ImGui::TreePop();
 		}
 		if (ImGui::TreeNode("Geometry"))
 		{
-			ImGui::Text("Meshes Loaded: %d", App->modelo->meshes.size());
+			ImGui::Text("Meshes Loaded: %d", App->model->meshes.size());
 			ImGui::Text("LoadedModel contains:");
-			ImGui::Text("Vertices: %d", App->modelo->numVertices);
-			ImGui::Text("Indices: %d", App->modelo->numIndices);
-			ImGui::Text("Faces/Triangles: %d", App->modelo->numFaces);
-			ImGui::Text("Center: %d", App->modelo->centerPoint);
+			ImGui::Text("Vertices: %d", App->model->numVertices);
+			ImGui::Text("Indices: %d", App->model->numIndices);
+			ImGui::Text("Faces/Triangles: %d", App->model->numFaces);
+			ImGui::Text("Center: %d", App->model->centerPoint);
 			ImGui::TreePop();
 		}
 		if (ImGui::TreeNode("Texture"))
@@ -189,7 +198,7 @@ update_status ModuleIMGUI::Update()
 				ImGui::Text("Height: %d", App->texture->textures_loaded[i].height);
 				if (ImGui::ImageButton((void*)(intptr_t)App->texture->textures_loaded[i].id, ImVec2(128, 128)))
 				{
-					App->modelo->UpdateTexture(App->texture->textures_loaded[i]);
+					App->model->UpdateTexture(App->texture->textures_loaded[i]);
 				}
 
 			}

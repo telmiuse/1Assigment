@@ -38,23 +38,13 @@ public:
 
 
 	ModuleInput();
-
-	// Destructor
 	virtual ~ModuleInput();
-
-	// Called before render is available
 	bool Init();
-
-	// Called before the first frame
 	bool Start();
 
-	// Called each loop iteration
 	update_status PreUpdate();
 
-	// Called before quitting
 	bool CleanUp();
-
-	// Check key states (includes mouse and joy buttons)
 	KeyState GetKey(int id) const
 	{
 		return keyboard[id];
@@ -70,13 +60,13 @@ public:
 		return scr;
 	}
 
-	// Check for window events last frame
 	bool GetWindowEvent(EventWindow code) const;
 
 	// Get mouse / axis position
 	const float2& GetMousePosition() const;
 	const float2& GetMouseMotion() const;
 	std::string dropped_filedir;
+
 private:
 	bool		windowEvents[WE_COUNT];
 	KeyState*	keyboard;

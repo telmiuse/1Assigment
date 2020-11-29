@@ -111,16 +111,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./SDL/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib/src;./Devil;./SDL/include;./Assimp/include/assimp;./ImGU</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./ImGU;./SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies);assimp-vc141-mt.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -224,7 +223,6 @@
     <ClInclude Include="C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\um\shellapi.h" />
     <ClInclude Include="ConfigurationWindow.h" />
     <ClInclude Include="ConsoleWindow.h" />
-    <ClInclude Include="debug_draw.hpp" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ImGU\imconfig.h" />
     <ClInclude Include="ImGU\imgui.h" />
@@ -234,6 +232,7 @@
     <ClInclude Include="ImGU\imstb_rectpack.h" />
     <ClInclude Include="ImGU\imstb_textedit.h" />
     <ClInclude Include="ImGU\imstb_truetype.h" />
+    <ClInclude Include="Leaks.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK2D.h" />
     <ClInclude Include="MathGeoLib\Algorithm\Random\LCG.h" />
@@ -312,9 +311,8 @@
     <ClInclude Include="MathGeoLib\Math\TransformOps.h" />
     <ClInclude Include="MathGeoLib\Math\vec2d.h" />
     <ClInclude Include="MathGeoLib\Time\Clock.h" />
-    <ClInclude Include="ModuleModelo.h" />
     <ClInclude Include="ModuleDebugDraw.h" />
-    <ClInclude Include="ModuleEditor.h" />
+    <ClInclude Include="ModuleModel.h" />
     <ClInclude Include="ModuleExTriangle.h" />
     <ClInclude Include="ModuleTexture.h" />
     <ClInclude Include="ModuleIMGUI.h" />
@@ -416,6 +414,7 @@
     <ClCompile Include="ConfigurationWindow.cpp" />
     <ClCompile Include="ConsoleWindow.cpp" />
     <ClCompile Include="DefaultImGuiWindow.cpp" />
+    <ClCompile Include="ImGU\DefaultImGuiWindow.cpp" />
     <ClCompile Include="ImGU\imgui.cpp" />
     <ClCompile Include="ImGU\imgui_demo.cpp" />
     <ClCompile Include="ImGU\imgui_draw.cpp" />
@@ -467,9 +466,8 @@
     <ClCompile Include="MathGeoLib\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib\Time\Clock.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
-    <ClCompile Include="ModuleModelo.cpp" />
     <ClCompile Include="ModuleDebugDraw.cpp" />
-    <ClCompile Include="ModuleEditor.cpp" />
+    <ClCompile Include="ModuleModel.cpp" />
     <ClCompile Include="ModuleExTriangle.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleRender.cpp" />

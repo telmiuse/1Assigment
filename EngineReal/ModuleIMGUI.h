@@ -32,7 +32,7 @@ public:
 	bool texture_window = false;
 	bool properties_window = false;
 	bool quit = false;
-	bool git = false;
+	bool Git = false;
 
 
 	int dirtextures = 0;

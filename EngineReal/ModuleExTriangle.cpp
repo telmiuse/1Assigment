@@ -5,10 +5,10 @@
 #include "Application.h"
 #include "ModuleTexture.h"
 #include "ModuleCamera.h"
-#include "ModuleModelo.h"
+#include "ModuleModel.h"
 #include "ModuleIMGUI.h"
 #include <string>
-
+#include "Leaks.h"
 ModuleExTriangle::ModuleExTriangle()
 {
 }
@@ -93,15 +93,15 @@ void ModuleExTriangle::SetUpMesh(Mesh mesh)
 }
 
 bool ModuleExTriangle::Init() {
-	App->modelo->LoadModel("Models/BakerHouse.fbx");
-	for (unsigned int i = 0; i < App->modelo->meshes.size(); i++)
+	App->model->LoadModel("Models/BakerHouse.fbx");
+	for (unsigned int i = 0; i < App->model->meshes.size(); i++)
 	{
-		SetUpMesh(App->modelo->meshes[i]);
+		SetUpMesh(App->model->meshes[i]);
 	}
 	vtx_shader = App->program->CompileShader(GL_VERTEX_SHADER, (App->program->LoadShaderSource("vertex.glsl")));
 	frg_shader = App->program->CompileShader(GL_FRAGMENT_SHADER, (App->program->LoadShaderSource("fragment.glsl")));
 	App->program->CreateProgram(vtx_shader, frg_shader);
-	App->texture->LoadTexture("Textures/Baker_housse.png");
+	App->texture->LoadTexture("Textures/Baker_house.png");
 	return true;
 }
 
@@ -126,14 +126,11 @@ update_status ModuleExTriangle::Update()
 	glUniformMatrix4fv(glGetUniformLocation(App->program->ProgramID, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
 	glUniformMatrix4fv(glGetUniformLocation(App->program->ProgramID, "view"), 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(App->program->ProgramID, "proj"), 1, GL_TRUE, &proj[0][0]);
-	/*
-	glUniformMatrix4fv(glGetUniformLocation(App->program->ProgramID, "model"), 1, GL_TRUE, &(App->Camera->model[0][0]));
-	glUniformMatrix4fv(glGetUniformLocation(App->program->ProgramID, "view"), 1, GL_TRUE, &(App->Camera->view[0][0]));
-	glUniformMatrix4fv(glGetUniformLocation(App->program->ProgramID, "proj"), 1, GL_TRUE, &(App->Camera->proj[0][0]));
-	*/
-	for (unsigned int i = 0; i < App->modelo->meshes.size(); i++)
+
+
+	for (unsigned int i = 0; i < App->model->meshes.size(); i++)
 	{
-		DrawMesh(App->modelo->meshes[i]);
+		DrawMesh(App->model->meshes[i]);
 	}
 
 	return UPDATE_CONTINUE;

@@ -7,7 +7,7 @@
 #include "ImGU/imgui_impl_opengl3.h"
 #include "ConsoleWindow.h"
 #include "ConfigurationWindow.h"
-
+#include "Leaks.h"
 ModuleEditor::ModuleEditor()
 {
 }

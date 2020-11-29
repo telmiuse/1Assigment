@@ -1,5 +1,5 @@
 #include "ModuleTexture.h"
-#include "ModuleModelo.h"
+#include "ModuleModel.h"
 #include "ModuleIMGUI.h"
 #include "Program.h"
 #include "Globals.h"
@@ -8,7 +8,7 @@
 #include "MathGeoLib/MathGeoLib.h"
 #include "IL/il.h"
 #include "IL/ilut.h"
-
+#include "Leaks.h"
 
 ModuleTexture::ModuleTexture()
 {

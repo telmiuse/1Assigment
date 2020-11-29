@@ -9,7 +9,6 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleExTriangle.cpp" />
-    <ClCompile Include="ModuleDebugDraw.cpp" />
     <ClCompile Include="MathGeoLib\Algorithm\GJK.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
@@ -137,8 +136,6 @@
       <Filter>MathGeoLib</Filter>
     </ClCompile>
     <ClCompile Include="ModuleTexture.cpp" />
-    <ClCompile Include="ModuleEditor.cpp" />
-    <ClCompile Include="ModuleModelo.cpp" />
     <ClCompile Include="ConfigurationWindow.cpp">
       <Filter>ImGu\GR</Filter>
     </ClCompile>
@@ -168,6 +165,9 @@
     </ClCompile>
     <ClCompile Include="Program.cpp" />
     <ClCompile Include="ModuleIMGUI.cpp" />
+    <ClCompile Include="ModuleModel.cpp" />
+    <ClCompile Include="ImGU\DefaultImGuiWindow.cpp" />
+    <ClCompile Include="ModuleDebugDraw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -181,7 +181,6 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="ModuleExTriangle.h" />
     <ClInclude Include="Program.h" />
-    <ClInclude Include="ModuleDebugDraw.h" />
     <ClInclude Include="MathGeoLib\Algorithm\GJK.h">
       <Filter>MathGeoLib</Filter>
     </ClInclude>
@@ -414,13 +413,10 @@
       <Filter>MathGeoLib</Filter>
     </ClInclude>
     <ClInclude Include="ModuleTexture.h" />
-    <ClInclude Include="ModuleEditor.h" />
-    <ClInclude Include="debug_draw.hpp" />
     <ClInclude Include="MathGeoLib\glut.h" />
     <ClInclude Include="ConfigurationWindow.h">
       <Filter>ImGu\GR</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleModelo.h" />
     <ClInclude Include="ConsoleWindow.h">
       <Filter>ImGu\GR</Filter>
     </ClInclude>
@@ -935,6 +931,9 @@
       <Filter>assimp</Filter>
     </ClInclude>
     <ClInclude Include="ModuleIMGUI.h" />
+    <ClInclude Include="ModuleModel.h" />
+    <ClInclude Include="Leaks.h" />
+    <ClInclude Include="ModuleDebugDraw.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">

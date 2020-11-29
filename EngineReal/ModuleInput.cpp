@@ -1,15 +1,16 @@
 #include "ModuleRender.h"
 #include "Globals.h"
 #include "ModuleWindow.h"
-#include "MolduleIMGUI.h"
+#include "ModuleIMGUI.h"
 #include "ModuleExTriangle.h"
 #include "Application.h"
 #include "ModuleInput.h"
-#include "ModuleModelo.h"
+#include "ModuleModel.h"
 #include "ModuleTexture.h"
 #include "SDL/include/SDL.h"
 #include "ImGu/imgui_impl_sdl.h"
-
+#include "Leaks.h"
+#include "Globals.h"
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput() : Module(), mouse({ 0, 0 }), mouse_motion({ 0,0 })
@@ -22,8 +23,9 @@ ModuleInput::ModuleInput() : Module(), mouse({ 0, 0 }), mouse_motion({ 0,0 })
 // Destructor
 ModuleInput::~ModuleInput()
 {
-	//RELEASE_ARRAY(keyboard);
 }
+
+
 
 // Called before render is available
 bool ModuleInput::Init()
@@ -141,10 +143,10 @@ update_status ModuleInput::PreUpdate()
 			if (dropped_filedir.substr(dropped_filedir.find_last_of(".") + 1) == "fbx")
 			{
 				App->imgui->AddLog("MODEL DROPPED from:%s\n", event.drop.file);
-				App->modelo->LoadModel(dropped_filedir.c_str());
-				for (unsigned int i = 0; i < App->modelo->meshes.size(); i++)
+				App->model->LoadModel(dropped_filedir.c_str());
+				for (unsigned int i = 0; i < App->model->meshes.size(); i++)
 				{
-					App->Triangle->SetUpMesh(App->modelo->meshes[i]);
+					App->Triangle->SetUpMesh(App->model->meshes[i]);
 				}
 				App->texture->LoadTexture("Textures/checkers.png");
 			}
@@ -152,10 +154,10 @@ update_status ModuleInput::PreUpdate()
 			{
 				App->imgui->AddLog("TEXTURE DROPPED from:%s\n", event.drop.file);
 				Texture text = App->texture->LoadTexture(dropped_filedir.c_str());
-				for (int i = 0; i < App->modelo->meshes.size(); i++)
+				for (int i = 0; i < App->model->meshes.size(); i++)
 				{
-					App->modelo->meshes[i].textures.clear();
-					App->modelo->meshes[i].textures.push_back(text);
+					App->model->meshes[i].textures.clear();
+					App->model->meshes[i].textures.push_back(text);
 				}
 
 			}
@@ -193,6 +195,7 @@ update_status ModuleInput::PreUpdate()
 bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL event subsystem");
+	RELEASE_ARRAY(keyboard);
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }

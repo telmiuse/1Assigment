@@ -5,6 +5,7 @@
 #include "ModuleIMGUI.h"
 #include "Application.h"
 #include "ModuleExTriangle.h"
+#include "Leaks.h"
 using namespace std;
 
 
@@ -91,6 +92,7 @@ unsigned Program::CompileShader(unsigned type, const char* source)
 			free(info);
 		}
 	}
+	delete source;
 	return shader_id;
 }
 

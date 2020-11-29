@@ -49,7 +49,6 @@ public:
 	void Focus();
 	void SetFOV(float fov);
 	void SetAspectRatio( float radio );
-	void RecalculateRot(float3& vec);
 	void RotateCam(const float xAxis, const float yAxis);
 	void OrbitCam(const float xAxis, const float yAxis);
 	float4x4 LookAt(float3, float3, float3);

@@ -1,5 +1,5 @@
 #include "ModuleExTriangle.h"
-#include "ModuleModelo.h"
+#include "ModuleModel.h"
 #include "Application.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
@@ -8,7 +8,7 @@
 #include "ModuleInput.h"
 #include <GL/glew.h>
 #include <time.h>    
-
+#include "Leaks.h"
 #include <iostream>
 
 using namespace std;
@@ -157,19 +157,16 @@ void ModuleCamera::OrbitCam(const float xAxis, const float yAxis)
 	if (xAxis != 0.0f)
 	{
 		float3x3 rot = float3x3::RotateY(xAxis);
-		frustum.pos = rot.Transform(frustum.pos - App->modelo->centerPoint) + App->modelo->centerPoint;
-		//frustum.front = rot.Transform(frustum.front).Normalized();
+		frustum.pos = rot.Transform(frustum.pos - App->model->centerPoint) + App->model->centerPoint;
 
 	}
 	if (yAxis != 0.0f)
 	{
 		float3x3 rot = float3x3::RotateX(yAxis);
-		frustum.pos = rot.Transform(frustum.pos - App->modelo->centerPoint) + App->modelo->centerPoint;
-		//frustum.front = rot.Transform(frustum.front).Normalized();
+		frustum.pos = rot.Transform(frustum.pos - App->model->centerPoint) + App->model->centerPoint;
 	}
-	LookAt(frustum.pos, App->modelo->centerPoint, frustum.up);
-	/*proj = frustum.ProjectionMatrix();
-	view = frustum.ViewMatrix();*/
+	LookAt(frustum.pos, App->model->centerPoint, frustum.up);
+
 }
 
 void ModuleCamera::RotateArrows() {
@@ -304,7 +301,7 @@ void ModuleCamera::SetAspectRatio(float fov)
 
 void ModuleCamera::Focus()
 {
-	frustum.pos = App->modelo->boundingBox.CenterPoint() - App->modelo->boundingBox.Size().Normalize() * frustum.front;
+	frustum.pos = App->model->boundingBox.CenterPoint() - App->model->boundingBox.Size().Normalize() * frustum.front;
 	frustum.front = -float3::unitZ;
 	frustum.up = float3::unitY;
 	App->Camera->view = frustum.ViewMatrix();

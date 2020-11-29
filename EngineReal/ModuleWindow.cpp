@@ -3,7 +3,7 @@
 #include "ModuleWindow.h"
 #include "ModuleIMGUI.h"
 #include "ModuleCamera.h"
-
+#include "Leaks.h"
 ModuleWindow::ModuleWindow()
 {
 }
