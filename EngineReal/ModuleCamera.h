@@ -40,7 +40,7 @@ public:
 	const float4x4 GetProjection() {
 		return frustum.ProjectionMatrix();
 	};
-	void WindowResized(unsigned width, unsigned height);
+
 	void ModuleCamera::Rotate(const float3x3 rotation_matrix);
 	void MoveForward();
 	void MoveRight();
@@ -48,7 +48,7 @@ public:
 	void MouseRotate();
 	void Focus();
 	void SetFOV(float fov);
-	void SetAspectRatio( float radio );
+	void SetAspectRatio( );
 	void RotateCam(const float xAxis, const float yAxis);
 	void OrbitCam(const float xAxis, const float yAxis);
 	float4x4 LookAt(float3, float3, float3);

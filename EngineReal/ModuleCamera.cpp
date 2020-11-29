@@ -276,9 +276,6 @@ bool ModuleCamera::CleanUp()
 	return true;
 }
 
-void ModuleCamera::WindowResized(unsigned width, unsigned height)
-{
-}
 
 void ModuleCamera::Rotate(const float3x3 rotation_matrix)
 {
@@ -290,11 +287,12 @@ void ModuleCamera::Rotate(const float3x3 rotation_matrix)
 
 void ModuleCamera::SetFOV(float fov)
 {
+	frustum.horizontalFov = fov;
 	frustum.verticalFov = fov;
-	SetAspectRatio(fov);
+	SetAspectRatio();
 	proj = frustum.ProjectionMatrix();
 }
-void ModuleCamera::SetAspectRatio(float fov)
+void ModuleCamera::SetAspectRatio()
 {
 	frustum.horizontalFov = 2.0f * atanf(tanf(frustum.verticalFov * 0.5f) * ((float)App->window->width / App->window->height));
 }

@@ -63,14 +63,10 @@ void ModuleExTriangle::SetUpMesh(Mesh mesh)
 	glBindVertexArray(vao);
 	// load data into vertex buffers
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	// A great thing about structs is that their memory layout is sequential for all its items.
-	// The effect is that we can simply pass a pointer to the struct and it translates perfectly to a glm::vec3/2 array which
-	// again translates to 3/2 floats which translates to a byte array.
-	glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * sizeof(Vertex), &(mesh.vertices[0]), GL_STATIC_DRAW);
 
+	glBufferData(GL_ARRAY_BUFFER, mesh.vertices.size() * sizeof(Vertex), &(mesh.vertices[0]), GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, mesh.indices.size() * sizeof(unsigned int), &(mesh.indices[0]), GL_STATIC_DRAW);
-
 	// set the vertex attribute pointers
 	// vertex Positions
 	glEnableVertexAttribArray(0);
