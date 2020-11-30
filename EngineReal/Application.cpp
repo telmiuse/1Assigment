@@ -8,7 +8,6 @@
 #include "ModuleExTriangle.h"
 #include "ModuleTexture.h"
 #include "Program.h"
-#include "ModuleEditor.h"
 #include "ModuleModel.h"
 #include "SDL.h"
 #include "Leaks.h"
