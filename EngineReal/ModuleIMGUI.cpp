@@ -61,8 +61,6 @@ update_status ModuleIMGUI::PreUpdate()
 
 update_status ModuleIMGUI::Update()
 {
-
-
 	if (testWindow)
 	{
 		ImGui::Begin("Camera Info", &testWindow);
